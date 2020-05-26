@@ -1,6 +1,29 @@
-$red: rgb(37, 5, 5);
+@import '~normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import 'header';
+@import 'formula';
+@import 'toolbar';
+@import 'tabel';
+@import 'dashboard';
 
-body{
-    font-size: 19px;
-    background-color: $red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: rgb(73, 22, 22);
+}
+
+.exel{
+    
+    position: relative;
+    color: #888;
+    height: 100%;
+    max-width: 100%;
+    font-size: .8rem;
 }
