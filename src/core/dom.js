@@ -1,6 +1,7 @@
 class Dom {
   constructor(selector) {
     // #app
+    // this.$$listeners = {} ... некая "приватная переменная"
     this.$el = typeof selector === 'string'
       ? document.querySelector(selector)
       : selector
@@ -19,6 +20,12 @@ class Dom {
     return this
   }
 
+  on(eventType, callback) {
+    this.$el.addEventListener(eventType, callback)
+  }
+  off(eventType, callback) {
+    this.$el.removeEventListener(eventType, callback)
+  }
   append(node) {
     if (node instanceof Dom) {
       node = node.$el

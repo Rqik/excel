@@ -1,3 +1,5 @@
+import { capitalize } from './utils'
+
 export class DomListener {
   constructor($root, listeners = []) {
     if (!$root) {
@@ -8,9 +10,25 @@ export class DomListener {
   }
 
   initDomListeners() {
-    console.log(this.listeners)
+    this.listeners.forEach(listener => {
+      const method = getMehodName(listener)
+      if (!this[method]) {
+        throw Error(`Method ${method} is not emp* in ${this.name} Component`)
+      }
+      this[method] = this[method].bind(this)
+      this.$root.on(listener, this[method])
+    })
   }
 
   removeDomListeners() {
+    this.listeners.forEach(listener => {
+      const method = getMehodName(listener)
+      this.$root.off(listener, this[method])
+    })
+    console.log(this.listeners)
   }
+}
+
+function getMehodName(eventName) {
+  return 'on' + capitalize(eventName)
 }
