@@ -3,16 +3,17 @@
     "env": {
         "es6": true,
         "browser": true,
-        "node": true        
+        "node": true
     },
     "rules": {
-      "require-jsdoc": "off",
-      "eol-last":"off",
-      "object-curly-spacing":"off",
-      "arrow-parens":"off",
-      "comma-dangle":"off",
-      "linebreak-style": "off",
-       "semi": "off"
+        "operator-linebreak": "off",
+        "require-jsdoc": "off",
+        "eol-last": "off",
+        "object-curly-spacing": "off",
+        "arrow-parens": "off",
+        "comma-dangle": "off",
+        "linebreak-style": "off",
+        "semi": "off"
     },
     "extends": ["eslint:recommended", "google"]
 }

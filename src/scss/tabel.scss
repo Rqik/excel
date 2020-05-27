@@ -1,7 +1,7 @@
 @import 'variabels';
 @import 'mixins';
 
-.exel__tabel {
+.excel__tabel {
     position: absolute;
     left: 0;
     right: 0;
@@ -40,7 +40,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-width: $cell-width;
+        min-width: 20px;
+        width: $cell-width;
         height: 100%;
         border: 1px solid $grey-color;
         border-top: none;
