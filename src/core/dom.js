@@ -1,9 +1,7 @@
 class Dom {
   constructor(selector) {
-    // #app
-    // this.$$listeners = {} ... некая "приватная переменная"
     this.$el = typeof selector === 'string'
-      ? document.querySelector(selector)
+      ? document.querySelector(`${selector}`)
       : selector
   }
 
@@ -37,6 +35,25 @@ class Dom {
       this.$el.appendChild(node)
     }
     return this
+  }
+  findAll(select) {
+    return this.$el.querySelectorAll(`${select}`)
+  }
+  get data() {
+    return this.$el.dataset
+  }
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => {
+      this.$el.style[key] = styles[key]
+    })
   }
 }
 // eveent.target
