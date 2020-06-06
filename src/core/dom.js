@@ -1,4 +1,3 @@
-// @ts-check
 class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string'
@@ -13,8 +12,14 @@ class Dom {
     }
     return this.$el.outerHTML.trim()
   }
+
+  clear() {
+    this.html('')
+    return this
+  }
+
   text(text) {
-    if (typeof text === 'string') {
+    if (typeof text !== 'undefined') {
       this.$el.textContent = text
       return this
     }
@@ -24,17 +29,16 @@ class Dom {
     return this.$el.textContent.trim()
   }
 
-  clear() {
-    this.html()
-    return this
-  }
-
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback)
   }
 
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
   }
 
   append(node) {
@@ -47,30 +51,39 @@ class Dom {
     } else {
       this.$el.appendChild(node)
     }
+
     return this
   }
 
-  find(selector) {
-    return $(this.$el.querySelector(selector))
-  }
-
-  findAll(select) {
-    return this.$el.querySelectorAll(`${select}`)
-  }
   get data() {
     return this.$el.dataset
   }
+
   closest(selector) {
     return $(this.$el.closest(selector))
   }
 
-  getCords() {
+  getCoords() {
     return this.$el.getBoundingClientRect()
   }
 
-  focus() {
-    this.$el.focus()
-    return this
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key]
+        })
+  }
+
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s]
+      return res
+    }, {})
   }
 
   id(parse) {
@@ -84,11 +97,19 @@ class Dom {
     return this.data.id
   }
 
-  css(styles = {}) {
-    Object.keys(styles).forEach((key) => {
-      this.$el.style[key] = styles[key]
-    })
+  focus() {
+    this.$el.focus()
+    return this
   }
+
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value)
+      return this
+    }
+    return this.$el.getAttribute(name)
+  }
+
   addClass(className) {
     this.$el.classList.add(className)
     return this
@@ -99,7 +120,7 @@ class Dom {
     return this
   }
 }
-// eveent.target
+
 export function $(selector) {
   return new Dom(selector)
 }
